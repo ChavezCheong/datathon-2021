@@ -1,0 +1,38 @@
+---
+title: "Democracy Analysis"
+author: "Jayesh Gupta, Jake Heller, Chavez Cheong"
+output: pdf_document
+fig_height: 4
+fig_width: 6
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+```{r check-for-packages, include = FALSE, echo = FALSE}
+list.of.packages <- c("inspectdf")
+new.packages <- list.of.packages[!(list.of.packages %in% installed.packages()[,"Package"])]
+if(length(new.packages)) install.packages(new.packages)
+```
+
+
+```{r load-packages, include = FALSE, echo= FALSE}
+library(tidyverse)
+library(foreign)
+library(inspectdf)
+library(broom)
+library(patchwork)
+library(knitr)
+```
+
+
+```{r load-data, echo=FALSE, message=FALSE, warnings=FALSE, include = FALSE}
+wave1_path <- "~/datathon-2021/data/data/W1 Merged Data/Wave.1_Data/"
+wave2_path <- "~/datathon-2021/data/data/W2 Merged Data/2w-3rd_release_all/merge/Wave2_20170724.sav"
+japan_wave1 <- read.spss(paste(wave1_path, "Japan/Japan v4.2.sav", sep = ''), 
+                  to.data.frame=TRUE)
+attach(japan_wave1)
+japan_wave1 %>% inspect_types()
+var_names <- attr(japan_wave1, "variable.labels")
+```
